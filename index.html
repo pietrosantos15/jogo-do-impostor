@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Impostor</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-color: #2d2d2d;
+            --primary: #646cff;
+            --secondary: #444;
+            --text: #ffffff;
+            --danger: #ff4646;
+            --success: #4cd964;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            background-color: var(--card-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 450px;
+        }
+
+        h1, h2, h3 { color: var(--primary); margin-top: 0; }
+        
+        .screen { display: none; animation: fadeIn 0.3s; }
+        .screen.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tabs para selecionar modo */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+        .tab-btn.active { background: var(--primary); opacity: 1; }
+
+        .input-group { margin-bottom: 1rem; text-align: left; }
+        label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #ccc; }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #555;
+            background: #333;
+            color: white;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        button:hover { filter: brightness(1.1); }
+        button.secondary { background-color: var(--secondary); }
+        button.danger { background-color: var(--danger); }
+
+        .role-card {
+            border: 2px dashed var(--primary);
+            padding: 2rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            background: rgba(100, 108, 255, 0.1);
+        }
+
+        .secret-word { font-size: 2rem; color: var(--success); font-weight: bold; margin: 15px 0; }
+        .impostor-text { color: var(--danger); font-size: 2rem; font-weight: bold; }
+        
+        /* Estilos para o modo Online */
+        .share-box {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            word-break: break-all;
+            border: 1px solid #444;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .player-btn {
+            background: #444;
+            margin: 0;
+            padding: 15px 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="setup-screen" class="screen active">
+            <h1>🕵️ Quem é o Impostor?</h1>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="setMode('local')">Local</button>
+                <button class="tab-btn" onclick="setMode('online')">Online</button>
+            </div>
+
+            <div class="input-group">
+                <label>Categoria</label>
+                <select id="categorySelect">
+                    <option value="aleatorio"> Aleatório</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Jogadores</label>
+                <input type="number" id="playerCount" value="4" min="3" max="20">
+            </div>
+
+            <div class="input-group">
+                <label>Impostores</label>
+                <input type="number" id="impostorCount" value="1" min="1" max="5">
+            </div>
+
+            <button id="startBtn" onclick="prepareGame()">Iniciar Jogo</button>
+            
+            <div id="online-share-area" style="display:none; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
+                <h3>Mande o link para os amigos:</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">Todo mundo entra no link e escolhe seu número.</p>
+                <div class="share-box" id="shareLinkText">...</div>
+                <button class="secondary" onclick="copyLink()">Copiar Link</button>
+                <button class="danger" onclick="location.reload()">Cancelar</button>
+            </div>
+        </div>
+
+        <div id="pick-player-screen" class="screen">
+            <h2>Escolha seu número</h2>
+            <p>Combine com seus amigos quem é quem!</p>
+            <div class="player-grid" id="playerGrid"></div>
+        </div>
+
+        <div id="pass-screen" class="screen">
+            <h1>Jogador <span id="playerDisplayNum">1</span></h1>
+            <p>Passe o dispositivo para este jogador.</p>
+            <button onclick="revealRole()">Ver Minha Função</button>
+        </div>
+
+        <div id="reveal-screen" class="screen">
+            <h1>Sua Função</h1>
+            <div class="role-card" id="roleContent"></div>
+            
+            <div id="local-controls">
+                <button onclick="nextPlayerLocal()">Esconder e Próximo</button>
+            </div>
+            <div id="online-controls" style="display:none">
+                <p style="font-size: 0.9rem; color: #aaa; margin-top:10px">Seu papel está salvo. Não mostre pra ninguém!</p>
+                <button class="secondary" onclick="resetGame()">Sair / Novo Jogo</button>
+            </div>
+        </div>
+
+        <div id="game-active-screen" class="screen">
+            <h1>Jogo Iniciado!</h1>
+            <p>Categoria:</p>
+            <h2 id="finalCategory"></h2>
+            <button class="secondary" onclick="resetGame()">Novo Jogo</button>
+        </div>
+    </div>
+
+    <script>
+        // --- DADOS DO JOGO ---
+        const gameData = {
+            "Cozinha": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela"],
+            "Escola": ["Lousa", "Carteira", "Professor", "Caderno", "Mochila", "Caneta"],
+            "Animais": ["Cachorro", "Gato", "Elefante", "Leão", "Pinguim", "Girafa", "Tubarão"],
+            "Países": ["Brasil", "Japão", "EUA", "Itália", "Egito", "França", "China"],
+            "Tecnologia": ["PC", "Celular", "Mouse", "Teclado", "Servidor", "Wifi", "Fone"],
+            "Clash Royale": [
+            "Flechas", "Bombardeiro", "Arqueiras", "Cavaleiro", "Bola de Fogo",
+            "Mini P.E.K.K.A", "Mosqueteira", "Gigante", "Príncipe", "Dragão Bebê",
+            "Exército de Esqueletos", "Bruxa", "Goblins Lanceiros", "Goblins", "Cabana de Goblins",
+            "Valquíria", "Relâmpago", "Barril de Goblins", "Esqueletos", "Servos",
+            "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão",
+            "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta",
+            "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo",
+
+            "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro",
+            "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas",
+            "VenenO", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha",
+            "Guardas", "Lava Hound", "Mineiro", "Sparky", "Lançador",
+            "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal",
+            "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone",
+            "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins",
+
+            "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora",
+            "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real",
+            "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve",
+            "Recrutas Reais", "Goblin Gigante", "Dragão Elétrico", "Domadora de Carneiro", "Destruidores de Muros",
+            "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira",
+            "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico",
+            "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira",
+
+            "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe",
+            "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro",
+            "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"
+]
+
+        };
+
+        // --- ESTADO ---
+        let gameMode = 'local'; // 'local' ou 'online'
+        let currentPlayers = [];
+        let currentCategory = "";
+        let currentSecret = "";
+        let currentPlayerIndex = 0;
+        let onlineParams = null; // Guarda configurações se veio por link
+
+        // --- SISTEMA DE RANDOMIZAÇÃO SINCRONIZADA (SEED) ---
+        // Isso permite que todos os celulares gerem o mesmo jogo sem servidor
+        function seededRandom(seed) {
+            var x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        // --- INICIALIZAÇÃO ---
+        window.onload = function() {
+            populateCategories();
+            checkUrlParams(); // Verifica se abriu via link de convite
+        };
+
+        function populateCategories() {
+            const select = document.getElementById('categorySelect');
+            Object.keys(gameData).forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat;
+                opt.innerText = cat;
+                select.appendChild(opt);
+            });
+        }
+
+        function setMode(mode) {
+            gameMode = mode;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const btn = document.getElementById('startBtn');
+            btn.innerText = mode === 'local' ? "Iniciar Jogo" : "Gerar Link para Amigos";
+        }
+
+        // --- LÓGICA PRINCIPAL ---
+
+        function prepareGame() {
+            const pCount = parseInt(document.getElementById('playerCount').value);
+            const iCount = parseInt(document.getElementById('impostorCount').value);
+            let cat = document.getElementById('categorySelect').value;
+
+            if (iCount >= pCount) return alert("Muitos impostores!");
+
+            // Se for aleatório, sorteia agora
+            if (cat === 'aleatorio') {
+                const keys = Object.keys(gameData);
+                cat = keys[Math.floor(Math.random() * keys.length)];
+            }
+
+            if (gameMode === 'local') {
+                // Modo Local: Gera na hora com Math.random
+                setupGameLogic(pCount, iCount, cat, Math.random());
+                startLocalGame();
+            } else {
+                // Modo Online: Gera um link
+                generateOnlineLink(pCount, iCount, cat);
+            }
+        }
+
+        // Gera o link codificado em Base64
+        function generateOnlineLink(p, i, cat) {
+            // Cria um "SEED" aleatório para garantir que o jogo seja único
+            const seed = Math.floor(Math.random() * 99999);
+            
+            // Cria objeto de configuração
+            const config = { p, i, c: cat, s: seed };
+            
+            // Converte para string Base64 para ficar na URL
+            const jsonStr = JSON.stringify(config);
+            const encoded = btoa(jsonStr); 
+            
+            const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?game=${encoded}`;
+            
+            document.getElementById('shareLinkText').innerText = url;
+            document.getElementById('online-share-area').style.display = 'block';
+            document.getElementById('startBtn').style.display = 'none';
+        }
+
+        // Verifica se a pessoa entrou pelo link
+        function checkUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const gameCode = params.get('game');
+
+            if (gameCode) {
+                try {
+                    const config = JSON.parse(atob(gameCode));
+                    gameMode = 'online';
+                    onlineParams = config;
+                    
+                    // Configura o jogo com os dados do link
+                    setupGameLogic(config.p, config.i, config.c, config.s);
+                    
+                    // Pula direto para seleção de jogador
+                    showPlayerSelectionScreen(config.p);
+                } catch (e) {
+                    alert("Link inválido!");
+                    window.location.search = "";
+                }
+            }
+        }
+
+        // Lógica "Core" do jogo (compartilhada entre Local e Online)
+        function setupGameLogic(totalPlayers, totalImpostors, category, seed) {
+            currentCategory = category;
+            
+            // Usa o SEED para escolher a palavra (sempre igual se o seed for igual)
+            const words = gameData[category];
+            // Sorteio determinístico da palavra baseado no seed
+            const wordIndex = Math.floor(seededRandom(seed) * words.length);
+            currentSecret = words[wordIndex];
+
+            // Criar Array
+            currentPlayers = Array(totalPlayers).fill('innocent');
+            for(let k=0; k<totalImpostors; k++) currentPlayers[k] = 'impostor';
+
+            // Embaralhar determinístico (Fisher-Yates com Seed)
+            let currentSeed = seed; 
+            for (let i = currentPlayers.length - 1; i > 0; i--) {
+                // Gera próximo numero pseudo-aleatorio
+                const r = seededRandom(currentSeed++);
+                const j = Math.floor(r * (i + 1));
+                [currentPlayers[i], currentPlayers[j]] = [currentPlayers[j], currentPlayers[i]];
+            }
+        }
+
+        // --- FLUXO LOCAL ---
+        function startLocalGame() {
+            currentPlayerIndex = 0;
+            switchScreen('pass-screen');
+            updateLocalDisplay();
+        }
+
+        function updateLocalDisplay() {
+            document.getElementById('playerDisplayNum').innerText = currentPlayerIndex + 1;
+        }
+
+        function nextPlayerLocal() {
+            currentPlayerIndex++;
+            if (currentPlayerIndex < currentPlayers.length) {
+                switchScreen('pass-screen');
+                updateLocalDisplay();
+            } else {
+                document.getElementById('finalCategory').innerText = currentCategory;
+                switchScreen('game-active-screen');
+            }
+        }
+
+        // --- FLUXO ONLINE ---
+        function showPlayerSelectionScreen(total) {
+            const grid = document.getElementById('playerGrid');
+            grid.innerHTML = '';
+            
+            for(let i=0; i<total; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'player-btn';
+                btn.innerText = `Jogador ${i+1}`;
+                btn.onclick = () => revealOnlineRole(i);
+                grid.appendChild(btn);
+            }
+            
+            switchScreen('pick-player-screen');
+        }
+
+        function revealOnlineRole(index) {
+            currentPlayerIndex = index;
+            // Configura controles
+            document.getElementById('local-controls').style.display = 'none';
+            document.getElementById('online-controls').style.display = 'block';
+            revealRole();
+        }
+
+        // --- FUNÇÕES COMUNS ---
+        function revealRole() {
+            const role = currentPlayers[currentPlayerIndex];
+            const content = document.getElementById('roleContent');
+
+            if (role === 'impostor') {
+                content.innerHTML = `
+                    <div class="impostor-text">VOCÊ É O IMPOSTOR</div>
+                    <div style="color:#aaa; margin-top:10px">Categoria: ${currentCategory}</div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div style="font-size:1.2rem">A palavra é:</div>
+                    <div class="secret-word">${currentSecret}</div>
+                    <div style="color:#aaa; margin-top:10px">Categoria: ${currentCategory}</div>
+                `;
+            }
+            switchScreen('reveal-screen');
+        }
+
+        function switchScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function resetGame() {
+            window.location.href = window.location.pathname; // Limpa URL e recarrega
+        }
+
+        function copyLink() {
+            const text = document.getElementById('shareLinkText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Link copiado!");
+        }
+    </script>
+</body>
+</html>
