@@ -89,6 +89,7 @@
         button:hover { filter: brightness(1.1); }
         button.secondary { background-color: var(--secondary); }
         button.danger { background-color: var(--danger); }
+        button.success { background-color: var(--success); color: #000; }
 
         .role-card {
             border: 2px dashed var(--primary);
@@ -138,31 +139,33 @@
                 <button class="tab-btn" onclick="setMode('online')">Online</button>
             </div>
 
-            <div class="input-group">
-                <label>Categoria</label>
-                <select id="categorySelect">
-                    <option value="aleatorio"> Aleatório</option>
-                </select>
-            </div>
+            <div id="setup-inputs">
+                <div class="input-group">
+                    <label>Categoria</label>
+                    <select id="categorySelect">
+                        <option value="aleatorio">🎲 Aleatório</option>
+                    </select>
+                </div>
 
-            <div class="input-group">
-                <label>Jogadores</label>
-                <input type="number" id="playerCount" value="4" min="3" max="20">
-            </div>
+                <div class="input-group">
+                    <label>Jogadores</label>
+                    <input type="number" id="playerCount" value="4" min="3" max="20">
+                </div>
 
-            <div class="input-group">
-                <label>Impostores</label>
-                <input type="number" id="impostorCount" value="1" min="1" max="5">
-            </div>
+                <div class="input-group">
+                    <label>Impostores</label>
+                    <input type="number" id="impostorCount" value="1" min="1" max="5">
+                </div>
 
-            <button id="startBtn" onclick="prepareGame()">Iniciar Jogo</button>
+                <button id="startBtn" onclick="prepareGame()">Iniciar Jogo</button>
+            </div>
             
             <div id="online-share-area" style="display:none; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
-                <h3>Mande o link para os amigos:</h3>
-                <p style="font-size: 0.8rem; color: #aaa;">Todo mundo entra no link e escolhe seu número.</p>
+                <h3>🔗 Link da Sala:</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">Envie para os amigos. Todos devem entrar e escolher um número.</p>
                 <div class="share-box" id="shareLinkText">...</div>
-                <button class="secondary" onclick="copyLink()">Copiar Link</button>
-                <button class="danger" onclick="location.reload()">Cancelar</button>
+                <button class="success" onclick="copyLink()">Copiar Link</button>
+                <button class="secondary" onclick="resetGame()">Voltar ao Início</button>
             </div>
         </div>
 
@@ -170,6 +173,7 @@
             <h2>Escolha seu número</h2>
             <p>Combine com seus amigos quem é quem!</p>
             <div class="player-grid" id="playerGrid"></div>
+            <button class="secondary" style="margin-top:20px" onclick="resetGame()">Sair</button>
         </div>
 
         <div id="pass-screen" class="screen">
@@ -187,6 +191,9 @@
             </div>
             <div id="online-controls" style="display:none">
                 <p style="font-size: 0.9rem; color: #aaa; margin-top:10px">Seu papel está salvo. Não mostre pra ninguém!</p>
+                
+                <button class="success" onclick="nextRoundOnline()">🔄 Próxima Rodada (Gerar Link)</button>
+                
                 <button class="secondary" onclick="resetGame()">Sair / Novo Jogo</button>
             </div>
         </div>
@@ -203,6 +210,34 @@
         // --- DADOS DO JOGO ---
         const gameData = {
             "Cozinha": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela"],
+            
+  "agentes": [
+    "Jett",
+    "Phoenix",
+    "Reyna",
+    "Raze",
+    "Yoru",
+    "Neon",
+    "Iso",
+    "Brimstone",
+    "Omen",
+    "Viper",
+    "Astra",
+    "Harbor",
+    "Clove",
+    "Sova",
+    "Breach",
+    "Skye",
+    "KAY/O",
+    "Fade",
+    "Gekko",
+    "Sage",
+    "Cypher",
+    "Killjoy",
+    "Chamber"
+  ],
+
+
             "Escola": ["Lousa", "Carteira", "Professor", "Caderno", "Mochila", "Caneta"],
             "Animais": ["Cachorro", "Gato", "Elefante", "Leão", "Pinguim", "Girafa", "Tubarão"],
             "Países": ["Brasil", "Japão", "EUA", "Itália", "Egito", "França", "China"],
@@ -215,7 +250,6 @@
             "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão",
             "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta",
             "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo",
-
             "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro",
             "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas",
             "VenenO", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha",
@@ -223,7 +257,6 @@
             "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal",
             "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone",
             "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins",
-
             "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora",
             "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real",
             "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve",
@@ -231,33 +264,28 @@
             "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira",
             "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico",
             "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira",
-
             "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe",
             "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro",
             "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"
-]
-
+            ]
         };
 
         // --- ESTADO ---
-        let gameMode = 'local'; // 'local' ou 'online'
+        let gameMode = 'local';
         let currentPlayers = [];
         let currentCategory = "";
         let currentSecret = "";
         let currentPlayerIndex = 0;
-        let onlineParams = null; // Guarda configurações se veio por link
+        let onlineParams = null; 
 
-        // --- SISTEMA DE RANDOMIZAÇÃO SINCRONIZADA (SEED) ---
-        // Isso permite que todos os celulares gerem o mesmo jogo sem servidor
         function seededRandom(seed) {
             var x = Math.sin(seed++) * 10000;
             return x - Math.floor(x);
         }
 
-        // --- INICIALIZAÇÃO ---
         window.onload = function() {
             populateCategories();
-            checkUrlParams(); // Verifica se abriu via link de convite
+            checkUrlParams(); 
         };
 
         function populateCategories() {
@@ -279,8 +307,6 @@
             btn.innerText = mode === 'local' ? "Iniciar Jogo" : "Gerar Link para Amigos";
         }
 
-        // --- LÓGICA PRINCIPAL ---
-
         function prepareGame() {
             const pCount = parseInt(document.getElementById('playerCount').value);
             const iCount = parseInt(document.getElementById('impostorCount').value);
@@ -288,42 +314,66 @@
 
             if (iCount >= pCount) return alert("Muitos impostores!");
 
-            // Se for aleatório, sorteia agora
             if (cat === 'aleatorio') {
                 const keys = Object.keys(gameData);
                 cat = keys[Math.floor(Math.random() * keys.length)];
             }
 
             if (gameMode === 'local') {
-                // Modo Local: Gera na hora com Math.random
                 setupGameLogic(pCount, iCount, cat, Math.random());
                 startLocalGame();
             } else {
-                // Modo Online: Gera um link
                 generateOnlineLink(pCount, iCount, cat);
             }
         }
 
-        // Gera o link codificado em Base64
         function generateOnlineLink(p, i, cat) {
-            // Cria um "SEED" aleatório para garantir que o jogo seja único
             const seed = Math.floor(Math.random() * 99999);
-            
-            // Cria objeto de configuração
             const config = { p, i, c: cat, s: seed };
             
-            // Converte para string Base64 para ficar na URL
             const jsonStr = JSON.stringify(config);
             const encoded = btoa(jsonStr); 
-            
             const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?game=${encoded}`;
             
+            showShareScreen(url);
+        }
+
+        function showShareScreen(url) {
             document.getElementById('shareLinkText').innerText = url;
             document.getElementById('online-share-area').style.display = 'block';
+            document.getElementById('setup-inputs').style.display = 'none'; // Esconde inputs para limpar a tela
             document.getElementById('startBtn').style.display = 'none';
         }
 
-        // Verifica se a pessoa entrou pelo link
+        // --- NOVA FUNÇÃO: PRÓXIMA RODADA ---
+        function nextRoundOnline() {
+            if (!onlineParams) return;
+
+            // 1. Gera nova seed
+            const newSeed = Math.floor(Math.random() * 99999);
+
+            // 2. Escolhe uma nova categoria aleatória (para não ficar repetitivo)
+            const keys = Object.keys(gameData);
+            const newCat = keys[Math.floor(Math.random() * keys.length)];
+
+            // 3. Monta nova config usando os mesmos jogadores
+            const newConfig = {
+                p: onlineParams.p,
+                i: onlineParams.i,
+                c: newCat,
+                s: newSeed
+            };
+
+            // 4. Gera Link
+            const jsonStr = JSON.stringify(newConfig);
+            const encoded = btoa(jsonStr);
+            const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}?game=${encoded}`;
+
+            // 5. Volta para a tela de setup mostrando o novo link
+            switchScreen('setup-screen');
+            showShareScreen(url);
+        }
+
         function checkUrlParams() {
             const params = new URLSearchParams(window.location.search);
             const gameCode = params.get('game');
@@ -334,10 +384,7 @@
                     gameMode = 'online';
                     onlineParams = config;
                     
-                    // Configura o jogo com os dados do link
                     setupGameLogic(config.p, config.i, config.c, config.s);
-                    
-                    // Pula direto para seleção de jogador
                     showPlayerSelectionScreen(config.p);
                 } catch (e) {
                     alert("Link inválido!");
@@ -346,31 +393,23 @@
             }
         }
 
-        // Lógica "Core" do jogo (compartilhada entre Local e Online)
         function setupGameLogic(totalPlayers, totalImpostors, category, seed) {
             currentCategory = category;
-            
-            // Usa o SEED para escolher a palavra (sempre igual se o seed for igual)
             const words = gameData[category];
-            // Sorteio determinístico da palavra baseado no seed
             const wordIndex = Math.floor(seededRandom(seed) * words.length);
             currentSecret = words[wordIndex];
 
-            // Criar Array
             currentPlayers = Array(totalPlayers).fill('innocent');
             for(let k=0; k<totalImpostors; k++) currentPlayers[k] = 'impostor';
 
-            // Embaralhar determinístico (Fisher-Yates com Seed)
             let currentSeed = seed; 
             for (let i = currentPlayers.length - 1; i > 0; i--) {
-                // Gera próximo numero pseudo-aleatorio
                 const r = seededRandom(currentSeed++);
                 const j = Math.floor(r * (i + 1));
                 [currentPlayers[i], currentPlayers[j]] = [currentPlayers[j], currentPlayers[i]];
             }
         }
 
-        // --- FLUXO LOCAL ---
         function startLocalGame() {
             currentPlayerIndex = 0;
             switchScreen('pass-screen');
@@ -392,7 +431,6 @@
             }
         }
 
-        // --- FLUXO ONLINE ---
         function showPlayerSelectionScreen(total) {
             const grid = document.getElementById('playerGrid');
             grid.innerHTML = '';
@@ -410,13 +448,11 @@
 
         function revealOnlineRole(index) {
             currentPlayerIndex = index;
-            // Configura controles
             document.getElementById('local-controls').style.display = 'none';
             document.getElementById('online-controls').style.display = 'block';
             revealRole();
         }
 
-        // --- FUNÇÕES COMUNS ---
         function revealRole() {
             const role = currentPlayers[currentPlayerIndex];
             const content = document.getElementById('roleContent');
@@ -442,12 +478,14 @@
         }
 
         function resetGame() {
-            window.location.href = window.location.pathname; // Limpa URL e recarrega
+            window.location.href = window.location.pathname; 
         }
 
         function copyLink() {
             const text = document.getElementById('shareLinkText').innerText;
-            navigator.clipboard.writeText(text);
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Link copiado!");
+            });
         }
     </script>
 </body>
