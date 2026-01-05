@@ -1,0 +1,23 @@
+ :root {
+            --bg-color: #1a1a1a; --card-color: #2d2d2d; --primary: #646cff;
+            --secondary: #444; --text: #ffffff; --danger: #ff4646; --success: #4cd964;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-color); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; text-align: center; }
+        .container { background-color: var(--card-color); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); width: 90%; max-width: 450px; box-sizing: border-box; margin: 20px; }
+        .screen { display: none; animation: fadeIn 0.3s; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .input-group { margin-bottom: 1.2rem; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #bbb; font-weight: 500; }
+        
+        input, select { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #555; background: #333; color: white; box-sizing: border-box; }
+        button { background-color: var(--primary); color: white; border: none; padding: 1rem; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 1rem; font-weight: bold; }
+        button.success { background-color: var(--success); color: #000; }
+        button.secondary { background-color: var(--secondary); }
+        
+        .role-card { border: 2px dashed var(--primary); padding: 2rem; margin: 1rem 0; border-radius: 8px; background: rgba(100, 108, 255, 0.1); }
+        .secret-word { font-size: 2rem; color: var(--success); font-weight: bold; }
+        .player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-top: 15px; width: 100%; }
+        .player-grid button { margin-top: 0; }
+        .share-box { background: #222; padding: 15px; border-radius: 8px; word-break: break-all; border: 1px solid #444; margin: 10px 0; font-size: 0.8rem; }
