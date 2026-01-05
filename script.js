@@ -1,68 +1,19 @@
 const gameData = {
             "Cozinha": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela"],
             
-            "Valorant": [
-                "Jett",
-                "Phoenix",
-                "Reyna",
-                "Raze",
-                "Yoru",
-                "Neon",
-                "Iso",
-                "Brimstone",
-                "Omen",
-                "Viper",
-                "Astra",
-                "Harbor",
-                "Clove",
-                "Sova",
-                "Breach",
-                "Skye",
-                "KAY/O",
-                "Fade",
-                "Gekko",
-                "Sage",
-                "Cypher",
-                "Killjoy",
-                "Chamber",
-                "Veto",
-                "Waylay",
-                "Tejo",
-                "DeadLock",
-                "Gekko"
-            ],
-
+            "Valorant": ["Jett", "Phoenix", "Reyna", "Raze", "Yoru", "Neon", "Iso", "Brimstone", "Omen", "Viper", "Astra", "Harbor", "Clove", "Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Sage", "Cypher", "Killjoy", "Chamber", "Veto", "Waylay", "Tejo", "DeadLock", "Gekko"],
 
             "Escola": ["Lousa", "Carteira", "Professor", "Caderno", "Mochila", "Caneta"],
+
             "Animais": ["Cachorro", "Gato", "Elefante", "Leão", "Pinguim", "Girafa", "Tubarão"],
+
             "Países": ["Brasil", "Japão", "EUA", "Itália", "Egito", "França", "China"],
+
             "Tecnologia": ["PC", "Celular", "Mouse", "Teclado", "Servidor", "Wifi", "Fone"],
-            "Clash Royale": [
-            "Flechas", "Bombardeiro", "Arqueiras", "Cavaleiro", "Bola de Fogo",
-            "Mini P.E.K.K.A", "Mosqueteira", "Gigante", "Príncipe", "Dragão Bebê",
-            "Exército de Esqueletos", "Bruxa", "Goblins Lanceiros", "Goblins", "Cabana de Goblins",
-            "Valquíria", "Relâmpago", "Barril de Goblins", "Esqueletos", "Servos",
-            "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão",
-            "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta",
-            "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo",
-            "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro",
-            "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas",
-            "VenenO", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha",
-            "Guardas", "Lava Hound", "Mineiro", "Sparky", "Lançador",
-            "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal",
-            "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone",
-            "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins",
-            "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora",
-            "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real",
-            "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve",
-            "Recrutas Reais", "Goblin Gigante", "Dragão Elétrico", "Domadora de Carneiro", "Destruidores de Muros",
-            "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira",
-            "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico",
-            "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira",
-            "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe",
-            "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro",
-            "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"
-            ]
+
+            "Clash Royale": [ "Flechas", "Bombardeiro", "Arqueiras", "Cavaleiro", "Bola de Fogo", "Mini P.E.K.K.A", "Mosqueteira", "Gigante", "Príncipe", "Dragão Bebê", "Exército de Esqueletos", "Bruxa", "Goblins Lanceiros", "Goblins", "Cabana de Goblins", "Valquíria", "Relâmpago", "Barril de Goblins", "Esqueletos", "Servos", "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão", "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta", "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo", "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro", "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas", "Veneno", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha", "Guardas", "Lava Hound", "Mineiro", "Sparky", "Lançador", "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal", "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone", "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins", "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora", "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real", "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve", "Recrutas Reais", "Goblin Gigante", "Dragão Elétrico", "Domadora de Carneiro", "Destruidores de Muros", "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira", "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico", "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira", "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe", "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro", "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"]
+
+            
         };
 
         let peer, conn, connections = [];
