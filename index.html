@@ -6,56 +6,65 @@
     <title>Jogo do Impostor</title>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div id="game-announcement" class="announcement"></div>
 
     <div class="container">
         <div id="setup-screen" class="screen active">
             <h1>Jogo do impostor</h1>
             
-            <div id="waiting-msg" style="display:none;">
-                <h2 style="color: var(--success);">Ligado ao Líder!</h2>
-                <p>Aguarde o início da partida...</p>
-            </div>
-
             <div id="setup-inputs">
                 <div class="input-group">
-                    <label>Categoria</label>
-                    <select id="categorySelect"><option value="aleatorio">🎲 Aleatório</option></select>
+                    <label>Seu Nome</label>
+                    <input type="text" id="playerName" placeholder="Como quer ser chamado?" maxlength="15">
                 </div>
-                <div class="input-group">
-                    <label>Quantia de jogadores</label>
-                    <input type="number" id="playerCount" value="3" min="3">
+
+                <div id="host-only-settings">
+                    <div class="input-group">
+                        <label>Categoria</label>
+                        <select id="categorySelect"><option value="aleatorio">🎲 Aleatório</option></select>
+                    </div>
+                    <div class="input-group">
+                        <label>Impostores</label>
+                        <input type="number" id="impostorCount" value="1" min="1">
+                    </div>
+                    <button class="success" onclick="prepareOnlineGame()">Gerar Sala Online</button>
+                    
+                    <div class="credits-container">
+                        <h3>Feito por: Pietro Santos</h3>
+                        <a href="https://www.linkedin.com/in/pietro-santos-609a11315/" target="_blank" class="linkedin-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label>Quantia de impostores</label>
-                    <input type="number" id="impostorCount" value="1" min="1">
+
+                <div id="guest-only-settings" style="display:none;">
+                    <button class="success" onclick="joinWithStoredID()">Entrar na Partida</button>
                 </div>
-                <button class="success" onclick="prepareOnlineGame()">Gerar Sala Online</button>
             </div>
 
             <div id="online-share-area" style="display:none;">
                 <h3>🔗 Link da Sala:</h3>
                 <div class="share-box" id="shareLinkText">A carregar...</div>
                 <button class="success" onclick="copyLink()">Copiar Link</button>
-                <p id="connected-count" style="color: #ffca28;">Aguardando pelo menos 2 amigos...</p>
+                <p id="connected-count" style="color: #ffca28;">Aguardando amigos...</p>
                 <div id="start-button-container"></div>
                 <button class="secondary" onclick="resetGame()">Cancelar</button>
             </div>
-        </div>
 
-        <div id="pick-player-screen" class="screen">
-            <h2>Escolha seu número</h2>
-            <div class="player-grid" id="playerGrid"></div>
-            <button class="secondary" onclick="resetGame()">Sair</button>
+            <div id="waiting-msg" style="display:none;">
+                <h2 style="color: var(--success);">Conectado!</h2>
+                <p id="wait-text">O líder iniciará a partida em breve...</p>
+            </div>
         </div>
 
         <div id="reveal-screen" class="screen">
             <h1>Sua Função</h1>
             <div class="role-card" id="roleContent"></div>
             <div id="host-controls" style="display:none">
-                <button class="success" onclick="broadcastRestart()">Jogar Novamente</button>
+                <button class="success" onclick="startGame()">Reiniciar</button>
             </div>
             <p id="client-msg" style="display:none; color: #aaa;">Aguarde o líder reiniciar...</p>
             <button class="secondary" onclick="resetGame()">Sair</button>

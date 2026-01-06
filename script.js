@@ -1,15 +1,11 @@
 const gameData = {
-            "Cozinha": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela"],
+            "Objetos": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela", "Batedeira", "Torradeira", "Prato", "Faca","Airfryer", "Cafeteira", "Colher", "Xícara", "Copo", "Tábua de corte", "Escorredor", "Peneira", "Ralador", "Frigideira","Tupperware", "Garrafa", "Lixeira", "Pano de prato", "Vassoura", "Rodo", "Pá de lixo", "Balde", "Máquina de lavar", "Ferro de passar", "Varal", "Cabide", "Guarda-roupa", "Cama", "Travesseiro", "Lençol", "Cobertor", "Abajur", "Tapete", "Cortina", "Sofá", "Poltrona", "Mesa", "Estante", "Televisão", "Controle remoto", "Quadro", "Vaso", "Relógio de parede", "Espelho", "Escrivaninha", "Cadeira", "Luminária", "Prateleira", "Chuveiro", "Toalha", "Escova de dentes", "Pente", "Secador de cabelo","Tesoura", "Martelo","Furadeira", "Prego", "Trena", "Lanterna", "Vela", "Fósforo", "Isqueiro", "Cesto de roupa", "Mochila", "Mala de viagem", "Guarda-chuva","Carteira", "Óculos","Calculadora", "Grampeador", "Clips", "Papel", "Caneta", "Lápis", "Borracha", "Régua", "Caderno", "Livro"],
             
             "Valorant": ["Jett", "Phoenix", "Reyna", "Raze", "Yoru", "Neon", "Iso", "Brimstone", "Omen", "Viper", "Astra", "Harbor", "Clove", "Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Sage", "Cypher", "Killjoy", "Chamber", "Veto", "Waylay", "Tejo", "DeadLock", "Gekko"],
 
-            "Escola": ["Lousa", "Carteira", "Professor", "Caderno", "Mochila", "Caneta"],
+            "Profissões": ["Médico", "Enfermeiro", "Professor", "Engenheiro", "Advogado", "Arquiteto", "Programador", "Cientista", "Psicólogo", "Dentista", "Veterinário", "Farmacêutico", "Nutricionista", "Fisioterapeuta", "Jornalista", "Escritor", "Designer", "Fotógrafo", "Cineasta", "Ator", "Cantor", "Músico", "Dançarino", "Pintor", "Escultor", "Cozinheiro", "Garçom", "Barman", "Padeiro", "Confeiteiro", "Motorista", "Piloto", "Comissário de bordo", "Marinheiro", "Capitão", "Policial", "Bombeiro", "Soldado", "Detetive", "Segurança", "Gari", "Jardineiro", "Agricultor", "Pescador", "Carpinteiro", "Pedreiro", "Eletricista", "Encanador", "Mecânico", "Soldador", "Pintor de paredes", "Costureiro", "Alfaiate", "Sapateiro", "Barbeiro", "Cabeleireiro", "Esteticista", "Maquiador", "Vendedor", "Caixa", "Gerente", "Administrador", "Contador", "Economista", "Secretário", "Atendente", "Carteiro", "Bibliotecário","Arqueólogo", "Astrônomo", "Físico", "Químico", "Biólogo", "Matemático", "Historiador", "Filósofo", "Sociólogo", "Político", "Diplomata", "Juiz", "Promotor", "Delegado", "Estagiário", "Aposentado", "Empresário", "Corretor de imóveis", "Publicitário", "Relações públicas", "Cientista de dados", "Guia turístico"],
 
-            "Animais": ["Cachorro", "Gato", "Elefante", "Leão", "Pinguim", "Girafa", "Tubarão"],
-
-            "Países": ["Brasil", "Japão", "EUA", "Itália", "Egito", "França", "China"],
-
-            "Tecnologia": ["PC", "Celular", "Mouse", "Teclado", "Servidor", "Wifi", "Fone"],
+            "Animais": ["Cachorro", "Gato", "Elefante", "Leão", "Pinguim", "Girafa", "Tubarão", "Tigre", "Zebra", "Golfinho", "Águia", "Canguru", "Urso Polar", "Tartaruga", "Lobo", "Raposa", "Coelho", "Hamster", "Porquinho-da-índia", "Cavalo", "Vaca", "Porco", "Ovelha", "Cabra", "Galinha", "Galo", "Pato", "Ganso", "Peru", "Pavão", "Cisne", "Papagaio", "Arara", "Tucano", "Coruja", "Gavião", "Beija-flor", "Pardal", "Pombo", "Morcego", "Urso Pardo", "Panda", "Koala", "Macaco", "Gorila", "Hipopótamo", "Rinoceronte", "Camelo", "Alpaca", "Veado", "Esquilo", "Castor", "Lontra", "Foca", "Leão-marinho", "Morsa", "Baleia Azul", "Orca", "Arraia", "Polvo", "Lula", "Caranguejo", "Lagosta", "Camarão", "Estrela-do-mar", "Cavalo-marinho", "Jacaré", "Cobra", "Lagarto", "Iguana", "Camaleão", "Sapo", "Abelha", "Formiga", "Cupim", "Borboleta", "Grilo", "Barata", "Mosca", "Mosquito", "Aranha", "Escorpião", "Centopeia", "Caracol", "Minhoca", "Água-viva"],
 
             "Clash Royale": [ "Flechas", "Bombardeiro", "Arqueiras", "Cavaleiro", "Bola de Fogo", "Mini P.E.K.K.A", "Mosqueteira", "Gigante", "Príncipe", "Dragão Bebê", "Exército de Esqueletos", "Bruxa", "Goblins Lanceiros", "Goblins", "Cabana de Goblins", "Valquíria", "Relâmpago", "Barril de Goblins", "Esqueletos", "Servos", "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão", "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta", "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo", "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro", "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas", "Veneno", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha", "Guardas", "Lava Hound", "Mineiro", "Sparky", "Lançador", "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal", "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone", "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins", "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora", "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real", "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve", "Recrutas Reais", "Goblin Gigante", "Dragão Elétrico", "Domadora de Carneiro", "Destruidores de Muros", "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira", "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico", "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira", "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe", "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro", "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"]
 
@@ -17,7 +13,7 @@ const gameData = {
         };
 
         let peer, conn, connections = [];
-        let isHost = false, currentPlayers = [], currentSecret = "", currentCategory = "";
+        let isHost = false, myName = "", roomID = null;
 
         window.onload = () => {
             Object.keys(gameData).forEach(cat => {
@@ -26,122 +22,132 @@ const gameData = {
                 document.getElementById('categorySelect').appendChild(opt);
             });
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('room')) joinRoom(urlParams.get('room'));
+            if (urlParams.has('room')) {
+                roomID = urlParams.get('room');
+                document.getElementById('host-only-settings').style.display = 'none';
+                document.getElementById('guest-only-settings').style.display = 'block';
+            }
         };
 
+        function showAnnouncement(text) {
+            const el = document.getElementById('game-announcement');
+            el.innerText = text;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
         function prepareOnlineGame() {
+            myName = document.getElementById('playerName').value.trim() || "Líder";
             isHost = true;
             peer = new Peer();
             peer.on('open', id => {
-                const url = window.location.origin + window.location.pathname + '?room=' + id;
-                document.getElementById('shareLinkText').innerText = url;
+                document.getElementById('shareLinkText').innerText = window.location.origin + window.location.pathname + '?room=' + id;
                 document.getElementById('setup-inputs').style.display = 'none';
                 document.getElementById('online-share-area').style.display = 'block';
             });
             peer.on('connection', c => {
-                connections.push(c);
-                updateConnectedCount();
+                connections.push({conn: c, name: "Aguardando..."});
+                c.on('data', data => {
+                    if(data.type === 'SEND_NAME') {
+                        const player = connections.find(p => p.conn === c);
+                        if(player) player.name = data.name;
+                        updateConnectedCount();
+                    }
+                });
             });
         }
 
-        function joinRoom(id) {
-            isHost = false;
+        function joinWithStoredID() {
+            myName = document.getElementById('playerName').value.trim() || "Convidado";
             peer = new Peer();
             peer.on('open', () => {
-                conn = peer.connect(id);
+                conn = peer.connect(roomID);
                 conn.on('open', () => {
+                    conn.send({type: 'SEND_NAME', name: myName});
                     document.getElementById('setup-inputs').style.display = 'none';
                     document.getElementById('waiting-msg').style.display = 'block';
                 });
-                conn.on('data', data => handleData(data));
+                conn.on('data', data => {
+                    if(data.type === 'ASSIGN_ROLE') revealRole(data.role, data.word, data.category);
+                    if(data.type === 'TURN_ANNOUNCE') showAnnouncement(`${data.name} começa.`);
+                });
             });
-        }
-
-        function handleData(data) {
-            if (data.type === 'RESTART') {
-                // Sincroniza a lógica de jogo com os dados REAIS vindos do líder
-                setupGameLogic(data.params.p, data.params.i, data.params.c, data.seed);
-                // Gera a quantidade exata de botões enviada pelo líder
-                showPlayerSelectionScreen(data.params.p);
-            }
         }
 
         function updateConnectedCount() {
             const count = connections.length;
+            document.getElementById('connected-count').innerText = `${count} amigo(s) conectado(s).`;
             const container = document.getElementById('start-button-container');
-            const statusMsg = document.getElementById('connected-count');
-            
-            statusMsg.innerText = `${count} amigo(s) conectado(s).`;
-            
-            if (count >= 2) {
-                statusMsg.style.color = "#4cd964";
-                if (container.innerHTML === "") {
-                    const btn = document.createElement('button');
-                    btn.innerText = "COMEÇAR JOGO";
-                    btn.className = "success";
-                    btn.onclick = broadcastRestart;
-                    container.appendChild(btn);
-                }
-            } else {
-                statusMsg.style.color = "#ffca28";
-                container.innerHTML = "";
+            if (count >= 2 && container.innerHTML === "") {
+                const btn = document.createElement('button');
+                btn.innerText = "COMEÇAR JOGO";
+                btn.className = "success";
+                btn.onclick = startGame;
+                container.appendChild(btn);
             }
         }
 
-        function broadcastRestart() {
+        // script.js (Parte da lógica de início/reinicio)
+
+        function startGame() {
             if (!isHost) return;
-            const pCount = parseInt(document.getElementById('playerCount').value);
-            const iCount = parseInt(document.getElementById('impostorCount').value);
-            
-            if (pCount < 3) return alert("O jogo precisa de no mínimo 3 jogadores!");
-            
+
+            const iCount = parseInt(document.getElementById('impostorCount').value) || 1;
             let cat = document.getElementById('categorySelect').value;
+            
             if (cat === 'aleatorio') {
                 const keys = Object.keys(gameData);
                 cat = keys[Math.floor(Math.random() * keys.length)];
             }
             
-            const seed = Math.floor(Math.random() * 99999);
-            const payload = { type: 'RESTART', seed: seed, params: { p: pCount, i: iCount, c: cat } };
+            const wordList = gameData[cat];
+            const word = wordList[Math.floor(Math.random() * wordList.length)];
             
-            // Envia para todos os amigos os parâmetros exatos configurados aqui
-            connections.forEach(c => c.send(payload));
-            handleData(payload); // O Host também executa
-        }
-
-        function setupGameLogic(p, i, cat, seed) {
-            currentCategory = cat;
-            const words = gameData[cat];
-            const seededRandom = (s) => { var x = Math.sin(s) * 10000; return x - Math.floor(x); };
-            currentSecret = words[Math.floor(seededRandom(seed) * words.length)];
-            currentPlayers = Array(p).fill('innocent');
-            for(let k=0; k<i; k++) if(k < p) currentPlayers[k] = 'impostor';
+            // Lista de jogadores: Host + Clientes conectados
+            let players = [{ name: myName, conn: null }, ...connections];
             
-            let s = seed;
-            for (let m = currentPlayers.length - 1; m > 0; m--) {
-                const j = Math.floor(seededRandom(s++) * (m + 1));
-                [currentPlayers[m], currentPlayers[j]] = [currentPlayers[j], currentPlayers[m]];
+            // Gerar papéis
+            let roles = Array(players.length).fill('innocent');
+            for (let k = 0; k < iCount; k++) {
+                if (k < roles.length) roles[k] = 'impostor';
             }
+            
+            // Embaralhar papéis
+            roles.sort(() => Math.random() - 0.5);
+
+            // Enviar funções para cada conexão
+            players.forEach((p, idx) => {
+                const roleData = { 
+                    type: 'ASSIGN_ROLE', 
+                    role: roles[idx], 
+                    word: word, 
+                    category: cat 
+                };
+                
+                if (p.conn) {
+                    p.conn.send(roleData);
+                } else {
+                    // Se for o Host (p.conn é null), revela localmente
+                    revealRole(roles[idx], word, cat);
+                }
+            });
+
+            // Sorteio de quem começa (Anúncio via pop-up)
+            setTimeout(() => {
+                const starter = players[Math.floor(Math.random() * players.length)];
+                const turnData = { type: 'TURN_ANNOUNCE', name: starter.name };
+                
+                // Notifica todos os clientes
+                connections.forEach(p => p.conn.send(turnData));
+                // Mostra no próprio Host
+                showAnnouncement(` ${starter.name} começa.`);
+            }, 1200);
         }
 
-        function showPlayerSelectionScreen(total) {
-            const grid = document.getElementById('playerGrid');
-            grid.innerHTML = '';
-            // Usa o parâmetro "total" que veio do líder, ignorando o input local
-            for(let i=0; i<total; i++) {
-                const btn = document.createElement('button');
-                btn.innerText = `Jogador ${i+1}`;
-                btn.onclick = () => revealRole(i);
-                grid.appendChild(btn);
-            }
-            switchScreen('pick-player-screen');
-        }
-
-        function revealRole(idx) {
-            const role = currentPlayers[idx];
+        function revealRole(role, word, category) {
             const content = document.getElementById('roleContent');
-            content.innerHTML = role === 'impostor' ? `<div style="color:var(--danger); font-size:2rem; font-weight:bold;">IMPOSTOR</div>` : `<div>A palavra é:</div><div class="secret-word">${currentSecret}</div>`;
-            content.innerHTML += `<div style="margin-top:10px; color:#aaa">Categoria: ${currentCategory}</div>`;
+            content.innerHTML = role === 'impostor' ? `<div style="color:var(--danger); font-size:2rem; font-weight:bold;">VOCÊ É O IMPOSTOR</div>` : `<div>A palavra é:</div><div class="secret-word">${word}</div>`;
+            content.innerHTML += `<div style="margin-top:10px; color:#aaa">Categoria: ${category}</div>`;
             document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
             document.getElementById('client-msg').style.display = isHost ? 'none' : 'block';
             switchScreen('reveal-screen');
@@ -154,7 +160,7 @@ const gameData = {
 
         function copyLink() {
             navigator.clipboard.writeText(document.getElementById('shareLinkText').innerText);
-            alert("Link copiado!");
+            showAnnouncement("Link copiado!");
         }
 
-        function resetGame() { window.location.href = window.location.pathname; }
+        function resetGame() { window.location.href = window.location.origin + window.location.pathname; }
