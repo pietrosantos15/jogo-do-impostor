@@ -33,7 +33,8 @@ const gameData = {
             const el = document.getElementById('game-announcement');
             el.innerText = text;
             el.classList.add('show');
-            setTimeout(() => el.classList.remove('show'), 5000);
+            
+            setTimeout(() => el.classList.remove('show'), 8000);
         }
 
         function prepareOnlineGame() {
@@ -69,7 +70,8 @@ const gameData = {
                 });
                 conn.on('data', data => {
                     if(data.type === 'ASSIGN_ROLE') revealRole(data.role, data.word, data.category);
-                    if(data.type === 'TURN_ANNOUNCE') showAnnouncement(`${data.name} começa.`);
+                
+                    if(data.type === 'TURN_ANNOUNCE') showTurnOrder(data.order);
                 });
             });
         }
@@ -87,8 +89,6 @@ const gameData = {
             }
         }
 
-        // script.js (Parte da lógica de início/reinicio)
-
         function startGame() {
             if (!isHost) return;
 
@@ -103,19 +103,15 @@ const gameData = {
             const wordList = gameData[cat];
             const word = wordList[Math.floor(Math.random() * wordList.length)];
             
-            // Lista de jogadores: Host + Clientes conectados
             let players = [{ name: myName, conn: null }, ...connections];
             
-            // Gerar papéis
             let roles = Array(players.length).fill('innocent');
             for (let k = 0; k < iCount; k++) {
                 if (k < roles.length) roles[k] = 'impostor';
             }
             
-            // Embaralhar papéis
             roles.sort(() => Math.random() - 0.5);
 
-            // Enviar funções para cada conexão
             players.forEach((p, idx) => {
                 const roleData = { 
                     type: 'ASSIGN_ROLE', 
@@ -127,21 +123,42 @@ const gameData = {
                 if (p.conn) {
                     p.conn.send(roleData);
                 } else {
-                    // Se for o Host (p.conn é null), revela localmente
                     revealRole(roles[idx], word, cat);
                 }
             });
 
-            // Sorteio de quem começa (Anúncio via pop-up)
+            
             setTimeout(() => {
-                const starter = players[Math.floor(Math.random() * players.length)];
-                const turnData = { type: 'TURN_ANNOUNCE', name: starter.name };
                 
-                // Notifica todos os clientes
+                let orderList = [...players].sort(() => Math.random() - 0.5);
+                let orderNames = orderList.map(p => p.name);
+
+                const turnData = { type: 'TURN_ANNOUNCE', order: orderNames };
+                
                 connections.forEach(p => p.conn.send(turnData));
-                // Mostra no próprio Host
-                showAnnouncement(` ${starter.name} começa.`);
+                showTurnOrder(orderNames);
             }, 1200);
+        }
+
+        function showTurnOrder(order) {
+            const orderText = "Ordem: " + order.join(" ➔ ");
+            showAnnouncement(orderText);
+
+            
+            const content = document.getElementById('roleContent');
+            
+            
+            const oldOrder = document.getElementById('visual-order');
+            if(oldOrder) oldOrder.remove();
+
+            const orderDiv = document.createElement('div');
+            orderDiv.id = "visual-order";
+            orderDiv.style.marginTop = "20px";
+            orderDiv.style.paddingTop = "15px";
+            orderDiv.style.borderTop = "1px solid #444";
+            orderDiv.innerHTML = `<small style="color:var(--primary); display:block; margin-bottom:5px;">ORDEM DE FALA:</small>` + 
+                                order.map((name, i) => `<span style="font-size:0.9rem;"><b>${i+1}º</b> ${name}</span>`).join(" <br> ");
+            content.appendChild(orderDiv);
         }
 
         function revealRole(role, word, category) {
