@@ -141,8 +141,7 @@ const gameData = {
         }
 
         function showTurnOrder(order) {
-            const orderText = "Ordem: " + order.join(" ➔ ");
-            showAnnouncement(orderText);
+    
 
             
             const content = document.getElementById('roleContent');
