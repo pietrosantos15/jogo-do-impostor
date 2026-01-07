@@ -38,14 +38,38 @@ const gameData = {
         }
 
         function prepareOnlineGame() {
-            myName = document.getElementById('playerName').value.trim() || "Líder";
+    
+            const nameInput = document.getElementById('playerName').value.trim();
+            
+            
+            if (!nameInput) {
+                alert("Por favor, digite o seu nome antes de criar a sala!");
+                return;
+            }
+
+            myName = nameInput;
             isHost = true;
+            
+            
+            document.getElementById('shareLinkText').innerText = "A ligar ao servidor de salas...";
+            document.getElementById('setup-inputs').style.display = 'none';
+            document.getElementById('online-share-area').style.display = 'block';
+
+            
             peer = new Peer();
+            
             peer.on('open', id => {
+                
                 document.getElementById('shareLinkText').innerText = window.location.origin + window.location.pathname + '?room=' + id;
-                document.getElementById('setup-inputs').style.display = 'none';
-                document.getElementById('online-share-area').style.display = 'block';
             });
+
+            
+            peer.on('error', err => {
+                console.error(err);
+                alert("Erro ao gerar sala. Verifique a sua ligação à internet.");
+                resetGame();
+            });
+
             peer.on('connection', c => {
                 connections.push({conn: c, name: "Aguardando..."});
                 c.on('data', data => {
