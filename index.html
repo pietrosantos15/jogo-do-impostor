@@ -11,6 +11,11 @@
 <body>
     <div id="game-announcement" class="announcement"></div>
 
+    <div id="connection-status" class="connection-status">
+        <span id="conn-dot" class="conn-dot"></span>
+        <span id="conn-label">Conectando...</span>
+    </div>
+
     <div class="container">
         <div id="setup-screen" class="screen active">
             <h1>Jogo do impostor</h1>
@@ -30,6 +35,37 @@
                         <label>Impostores</label>
                         <input type="number" id="impostorCount" value="1" min="1">
                     </div>
+
+                    <div class="input-group">
+                        <label>Modo da palavra do impostor</label>
+                        <div class="word-mode-selector">
+                            <label class="word-mode-option" id="mode-none">
+                                <input type="radio" name="impostorWordMode" value="none" checked>
+                                <div class="word-mode-card">
+                                    <span class="mode-icon">🚫</span>
+                                    <span class="mode-name">Sem palavra</span>
+                                    <span class="mode-desc">Impostor não vê nada</span>
+                                </div>
+                            </label>
+                            <label class="word-mode-option" id="mode-similar">
+                                <input type="radio" name="impostorWordMode" value="similar">
+                                <div class="word-mode-card">
+                                    <span class="mode-icon">🔀</span>
+                                    <span class="mode-name">Parecida</span>
+                                    <span class="mode-desc">Outra palavra da categoria</span>
+                                </div>
+                            </label>
+                            <label class="word-mode-option" id="mode-same">
+                                <input type="radio" name="impostorWordMode" value="same">
+                                <div class="word-mode-card">
+                                    <span class="mode-icon">✅</span>
+                                    <span class="mode-name">Idêntica</span>
+                                    <span class="mode-desc">Impostor vê a palavra certa</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
                     <button class="success" onclick="prepareOnlineGame()">Gerar Sala Online</button>
                     
                     <div class="credits-container">
