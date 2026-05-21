@@ -20,7 +20,44 @@ body {
     text-align: center;
 }
 
-/* Estilo do anúncio no topo (Sorteio e avisos) */
+/* ---- Barra de status de conexão ---- */
+.connection-status {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    border: 1px solid #444;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 6px 16px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: #ccc;
+    z-index: 999;
+    transition: opacity 0.3s;
+}
+
+.conn-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.conn-dot.connected    { background: var(--success); box-shadow: 0 0 6px var(--success); }
+.conn-dot.connecting   { background: #ffca28; box-shadow: 0 0 6px #ffca28; animation: pulse 1s infinite; }
+.conn-dot.disconnected { background: var(--danger); box-shadow: 0 0 6px var(--danger); animation: pulse 1s infinite; }
+.conn-dot.error        { background: var(--danger); }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ---- Anúncio no topo ---- */
 .announcement {
     position: fixed;
     top: -100px;
@@ -36,11 +73,9 @@ body {
     transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     white-space: nowrap;
 }
+.announcement.show { top: 0; }
 
-.announcement.show {
-    top: 0;
-}
-
+/* ---- Container principal ---- */
 .container {
     background-color: var(--card-color);
     padding: 2rem;
@@ -52,127 +87,80 @@ body {
     margin: 20px;
 }
 
-.screen { 
-    display: none; 
-    animation: fadeIn 0.4s ease-in-out; /* Suaviza a transição entre rodadas */
-}
-
-.screen.active { 
-    display: block; 
-}
+.screen { display: none; animation: fadeIn 0.4s ease-in-out; }
+.screen.active { display: block; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.input-group { 
-    margin-bottom: 1.2rem; 
-    text-align: left; 
+.input-group { margin-bottom: 1.2rem; text-align: left; }
+
+label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #bbb; font-weight: 500; }
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background: #333;
+    color: white;
+    box-sizing: border-box;
 }
 
-label { 
-    display: block; 
-    margin-bottom: 5px; 
-    font-size: 0.85rem; 
-    color: #bbb; 
-    font-weight: 500; 
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
-input, select { 
-    width: 100%; 
-    padding: 12px; 
-    border-radius: 6px; 
-    border: 1px solid #555; 
-    background: #333; 
-    color: white; 
-    box-sizing: border-box; 
+button:disabled {
+    background-color: #222 !important;
+    color: var(--primary) !important;
+    cursor: not-allowed;
+    border: 1px solid #444;
+    opacity: 1;
 }
 
-button { 
-    background-color: var(--primary); 
-    color: white; 
-    border: none; 
-    padding: 1rem; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    width: 100%; 
-    margin-top: 1rem; 
-    font-weight: bold; 
-    transition: 0.2s; 
+button.success { background-color: var(--success); color: #000; }
+button.secondary { background-color: var(--secondary); }
+
+.role-card {
+    border: 2px dashed var(--primary);
+    padding: 2rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    background: rgba(100, 108, 255, 0.1);
 }
 
-/* Estilo para quando um jogador já escolheu o número */
-button:disabled { 
-    background-color: #222 !important; 
-    color: var(--primary) !important; 
-    cursor: not-allowed; 
-    border: 1px solid #444; 
-    opacity: 1; 
-}
+.secret-word { font-size: 2rem; color: var(--success); font-weight: bold; }
 
-button.success { 
-    background-color: var(--success); 
-    color: #000; 
-}
-
-button.secondary { 
-    background-color: var(--secondary); 
-}
-
-.role-card { 
-    border: 2px dashed var(--primary); 
-    padding: 2rem; 
-    margin: 1rem 0; 
-    border-radius: 8px; 
-    background: rgba(100, 108, 255, 0.1); 
-}
-
-.secret-word { 
-    font-size: 2rem; 
-    color: var(--success); 
-    font-weight: bold; 
-}
-
-.player-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); 
-    gap: 10px; 
-    margin-top: 15px; 
-    width: 100%; 
-}
-
-.player-grid button { 
-    margin-top: 0; 
-    font-size: 0.85rem; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-}
-
-.share-box { 
-    background: #222; 
-    padding: 15px; 
-    border-radius: 8px; 
-    word-break: break-all; 
-    border: 1px solid #444; 
-    margin: 10px 0; 
-    font-size: 0.8rem; 
+.share-box {
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    word-break: break-all;
+    border: 1px solid #444;
+    margin: 10px 0;
+    font-size: 0.8rem;
 }
 
 .credits-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Espaço entre o nome e o ícone */
+    gap: 8px;
     margin-top: 15px;
 }
-
-.credits-container h3 {
-    margin: 0;
-    font-size: 1rem;
-    color: #bbb;
-}
-
+.credits-container h3 { margin: 0; font-size: 1rem; color: #bbb; }
 .linkedin-link {
     color: #0077b5;
     font-size: 1.2rem;
@@ -181,8 +169,49 @@ button.secondary {
     display: flex;
     align-items: center;
 }
+.linkedin-link:hover { transform: scale(1.2); color: #00a0dc; }
 
-.linkedin-link:hover {
-    transform: scale(1.2);
-    color: #00a0dc;
+/* ---- Seletor de modo da palavra do impostor ---- */
+.word-mode-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 6px;
 }
+
+.word-mode-option {
+    cursor: pointer;
+}
+
+.word-mode-option input[type="radio"] {
+    display: none; /* esconde o radio nativo */
+}
+
+.word-mode-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px;
+    border-radius: 8px;
+    border: 2px solid #444;
+    background: #222;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.word-mode-card:hover {
+    border-color: var(--primary);
+    background: rgba(100, 108, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+.word-mode-card.selected {
+    border-color: var(--primary);
+    background: rgba(100, 108, 255, 0.18);
+}
+
+.mode-icon { font-size: 1.4rem; }
+.mode-name { font-size: 0.78rem; font-weight: bold; color: #fff; }
+.mode-desc { font-size: 0.65rem; color: #888; text-align: center; line-height: 1.3; }
