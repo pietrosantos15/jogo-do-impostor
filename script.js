@@ -1,16 +1,13 @@
 
-const PEER_SERVER_URL = "server-jogo-do-impostor.onrender.com";
+const PEER_SERVER_URL = "server-jogo-do-impostor.onrender.com"
+
 
 const gameData = {
     "Objetos": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela", "Batedeira", "Torradeira", "Prato", "Faca","Airfryer", "Cafeteira", "Colher", "Xícara", "Copo", "Tábua de corte", "Escorredor", "Peneira", "Ralador", "Frigideira","Tupperware", "Garrafa", "Lixeira", "Pano de prato", "Vassoura", "Rodo", "Pá de lixo", "Balde", "Máquina de lavar", "Ferro de passar", "Varal", "Cabide", "Guarda-roupa", "Cama", "Travesseiro", "Lençol", "Cobertor", "Abajur", "Tapete", "Cortina", "Sofá", "Poltrona", "Mesa", "Estante", "Televisão", "Controle remoto", "Quadro", "Vaso", "Relógio de parede", "Espelho", "Escrivaninha", "Cadeira", "Luminária", "Prateleira", "Chuveiro", "Toalha", "Escova de dentes", "Pente", "Secador de cabelo","Tesoura", "Martelo","Furadeira", "Prego", "Trena", "Lanterna", "Vela", "Fósforo", "Isqueiro", "Cesto de roupa", "Mochila", "Mala de viagem", "Guarda-chuva","Carteira", "Óculos","Calculadora", "Grampeador", "Clips", "Papel", "Caneta", "Lápis", "Borracha", "Régua", "Caderno", "Livro"],
-    
     "Valorant": ["Jett", "Phoenix", "Reyna", "Raze", "Yoru", "Neon", "Iso", "Brimstone", "Omen", "Viper", "Astra", "Harbor", "Clove", "Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Sage", "Cypher", "Killjoy", "Chamber", "Veto", "Waylay", "Tejo", "DeadLock", "Gekko"],
-
     "Profissões": ["Médico", "Enfermeiro", "Professor", "Engenheiro", "Advogado", "Arquiteto", "Programador", "Cientista", "Psicólogo", "Dentista", "Veterinário", "Farmacêutico", "Nutricionista", "Fisioterapeuta", "Jornalista", "Escritor", "Designer", "Fotógrafo", "Ator", "Cantor", "Músico", "Dançarino", "Pintor", "Escultor", "Cozinheiro", "Garçom", "Barman", "Padeiro", "Confeiteiro", "Motorista", "Piloto", "Comissário de bordo", "Marinheiro", "Policial", "Bombeiro", "Soldado", "Detetive", "Segurança", "Gari", "Jardineiro", "Agricultor", "Pescador", "Carpinteiro", "Pedreiro", "Eletricista", "Encanador", "Mecânico", "Costureiro", "Alfaiate", "Sapateiro", "Barbeiro", "Cabeleireiro", "Esteticista", "Maquiador", "Vendedor", "Caixa", "Gerente", "Contador", "Economista", "Secretário", "Atendente", "Carteiro", "Bibliotecário","Arqueólogo", "Astrônomo", "Físico", "Químico", "Biólogo", "Matemático", "Historiador", "Filósofo", "Sociólogo", "Político", "Diplomata", "Juiz", "Delegado", "Aposentado", "Empresário", "Corretor de imóveis", "Publicitário", "Relações públicas", "Cientista de dados", "Guia turístico"],
-
     "Animais": ["Cachorro", "Gato", "Elefante", "Leão", "Pinguim", "Girafa", "Tubarão", "Tigre", "Zebra", "Golfinho", "Águia", "Canguru", "Urso Polar", "Tartaruga", "Lobo", "Raposa", "Coelho", "Hamster", "Porquinho-da-índia", "Cavalo", "Vaca", "Porco", "Ovelha", "Cabra", "Galinha", "Galo", "Pato", "Ganso", "Peru", "Pavão", "Cisne", "Papagaio", "Arara", "Tucano", "Coruja", "Gavião", "Beija-flor", "Pardal", "Pombo", "Morcego", "Urso Pardo", "Panda", "Koala", "Macaco", "Gorila", "Hipopótamo", "Rinoceronte", "Camelo", "Alpaca", "Veado", "Esquilo", "Castor", "Lontra", "Foca", "Leão-marinho", "Morsa", "Baleia Azul", "Orca", "Arraia", "Polvo", "Lula", "Caranguejo", "Lagosta", "Camarão", "Estrela-do-mar", "Cavalo-marinho", "Jacaré", "Cobra", "Lagarto", "Iguana", "Camaleão", "Sapo", "Abelha", "Formiga", "Cupim", "Borboleta", "Grilo", "Barata", "Mosca", "Mosquito", "Aranha", "Escorpião", "Centopeia", "Caracol", "Minhoca", "Água-viva"],
-
-    "Clash Royale": [ "Flechas", "Bombardeiro", "Arqueiras", "Cavaleiro", "Bola de Fogo", "Mini P.E.K.K.A", "Mosqueteira", "Gigante", "Príncipe", "Dragão Bebê", "Exército de Esqueletos", "Bruxa", "Goblins Lanceiros", "Goblins", "Cabana de Goblins", "Valquíria", "Relâmpago", "Barril de Goblins", "Esqueletos", "Servos", "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão", "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta", "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo", "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro", "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas", "Veneno", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha", "Guardas", "Lava Hound", "Mineiro", "Sparky", "Lançador", "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal", "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone", "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins", "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora", "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real", "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve", "Recrutas Reais", "Goblin Gigante", "Dragão Elétrico", "Domadora de Carneiro", "Destruidores de Muros", "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira", "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico", "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira", "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe", "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro", "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"]
+    "Clash Royale": ["Flechas", "Bombardeiro", "Arqueiras", "Cavaleiro", "Bola de Fogo", "Mini P.E.K.K.A", "Mosqueteira", "Gigante", "Príncipe", "Dragão Bebê", "Exército de Esqueletos", "Bruxa", "Goblins Lanceiros", "Goblins", "Cabana de Goblins", "Valquíria", "Relâmpago", "Barril de Goblins", "Esqueletos", "Servos", "Lápide", "Torre de Bombas", "Esqueleto Gigante", "Balão", "Canhão", "Bárbaros", "Foguete", "Cabana de Bárbaros", "Fúria", "X-Besta", "Tesla", "Horda de Servos", "Torre Inferno", "Corredor", "Feitiço de Gelo", "P.E.K.K.A", "Zap", "Mago", "Espelho", "Morteiro", "Coletor de Elixir", "Golem", "Gigante Real", "Três Mosqueteiras", "Príncipe das Trevas", "Veneno", "Mago de Gelo", "Princesa", "Espírito de Fogo", "Fornalha", "Guardas", "Lava Hound", "Mineiro", "Sparky", "Lançador", "Espírito de Gelo", "Lenhador", "O Tronco", "Megasservo", "Dragão Infernal", "Golem de Gelo", "Cemitério", "Tornado", "Bárbaros de Elite", "Clone", "Mago Elétrico", "Goblin com Dardo", "Executor", "Ariete de Batalha", "Gangue de Goblins", "Bandida", "Bruxa Sombria", "Morcegos", "Carrinho de Canhão", "Máquina Voadora", "Barril de Esqueletos", "Megacavaleiro", "Eletrocutadores", "Caçador", "Fantasma Real", "Arqueiro Mágico", "Barril de Bárbaro", "Patifes", "Porcos Reais", "Bola de Neve", "Recrutas Reais", "Goblin Gigante", "Dragão Elétrico", "Domadora de Carneiro", "Destruidores de Muros", "Terremoto", "Jaula de Goblin", "Pescador", "Golem de Elixir", "Curadora Guerreira", "Pirotécnica", "Encomenda Real", "Espírito Curador", "Dragões Esqueleto", "Gigante Elétrico", "Espírito Elétrico", "Bruxa Mãe", "Escavadeira de Goblins", "Cavaleiro Dourado", "Rainha Arqueira", "Rei Esqueleto", "Mineiro Bombado", "Monge", "Fênix", "Pequeno Príncipe", "Feitiço de Vácuo", "Goblin Demolidor", "Máquina Goblin", "Maldição Goblin", "Arbusto Traçoeiro", "Goblinstein", "Gigante das Runas", "Berserker", "Imperatriz Espiritual", "Vinhas"]
 };
 
 let peer, conn, connections = [];
@@ -18,7 +15,32 @@ let isHost = false, myName = "", roomID = null;
 let reconnectAttempts = 0;
 const MAX_RECONNECT = 5;
 
+const GEMINI_API_KEY = "AIzaSyD5-8JbFmwK9E8d-EGhMPkxxSNO7xASnWw";
+-
+async function generateHint(word, category) {
+    try {
+        const prompt = `Você é um assistente para um jogo de dedução chamado Jogo do Impostor. Crie uma dica curta (máximo 6 palavras) sobre "${word}" da categoria "${category}" que dê uma pista sem revelar a palavra. Exemplos: para "Leão" → "rei das savanas com juba", para "Jett" → "agente ágil com facas e vento", para "Geladeira" → "guarda comida em baixa temperatura". Responda APENAS com a dica, sem explicações, sem pontuação no final, sem aspas.`;
 
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: { maxOutputTokens: 50, temperature: 0.7 }
+                })
+            }
+        );
+        const data = await response.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+    } catch (e) {
+        console.error("Erro ao gerar dica:", e);
+        return null;
+    }
+}
+
+// ---- Indicador de conexão ----
 function setConnectionStatus(state) {
     const dot = document.getElementById('conn-dot');
     const label = document.getElementById('conn-label');
@@ -31,79 +53,35 @@ function setConnectionStatus(state) {
     else if (state === 'error') { label.innerText = 'Erro de conexão'; bar.style.display = 'flex'; }
 }
 
-
+// ---- Criação do Peer ----
 function createPeer(id) {
     setConnectionStatus('connecting');
-
     let peerConfig;
-
     if (PEER_SERVER_URL) {
-        peerConfig = {
-            host: PEER_SERVER_URL,
-            port: 443,
-            path: '/peerjs',
-            secure: true,
-            key: 'peerjs',
-            debug: 0,
-            config: {
-                iceServers: [
-                    { urls: 'stun:stun.l.google.com:19302' },
-                    { urls: 'stun:stun1.l.google.com:19302' }
-                ]
-            }
-        };
+        peerConfig = { host: PEER_SERVER_URL, port: 443, path: '/peerjs', secure: true, key: 'peerjs', debug: 0, config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }] } };
     } else {
-
-        peerConfig = {
-            host: '0.peerjs.com',
-            port: 443,
-            path: '/',
-            secure: true,
-            debug: 0,
-            config: {
-                iceServers: [
-                    { urls: 'stun:stun.l.google.com:19302' },
-                    { urls: 'stun:stun1.l.google.com:19302' }
-                ]
-            }
-        };
+        peerConfig = { host: '0.peerjs.com', port: 443, path: '/', secure: true, debug: 0, config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }] } };
     }
-
     const p = id ? new Peer(id, peerConfig) : new Peer(peerConfig);
-
-    p.on('open', () => {
-        reconnectAttempts = 0;
-        setConnectionStatus('connected');
-    });
-
+    p.on('open', () => { reconnectAttempts = 0; setConnectionStatus('connected'); });
     p.on('disconnected', () => {
         setConnectionStatus('disconnected');
         if (reconnectAttempts < MAX_RECONNECT) {
             reconnectAttempts++;
-            setTimeout(() => {
-                try { p.reconnect(); } catch(e) { console.warn('Reconexão falhou:', e); }
-            }, 2000 * reconnectAttempts);
+            setTimeout(() => { try { p.reconnect(); } catch(e) {} }, 2000 * reconnectAttempts);
         }
     });
-
     p.on('error', (err) => {
         setConnectionStatus('error');
-        console.error('PeerJS error:', err.type, err);
-        if (['server-error', 'network', 'socket-error', 'socket-closed'].includes(err.type)) {
-            if (reconnectAttempts < MAX_RECONNECT) {
-                reconnectAttempts++;
-                setTimeout(() => {
-                    if (isHost) recreateHostPeer();
-                }, 3000 * reconnectAttempts);
-            }
+        if (['server-error', 'network', 'socket-error', 'socket-closed'].includes(err.type) && reconnectAttempts < MAX_RECONNECT) {
+            reconnectAttempts++;
+            setTimeout(() => { if (isHost) recreateHostPeer(); }, 3000 * reconnectAttempts);
         }
     });
-
     return p;
 }
 
 function recreateHostPeer() {
-    if (!peer) return;
     const oldId = peer.id;
     try { peer.destroy(); } catch(e) {}
     peer = createPeer(oldId);
@@ -123,10 +101,7 @@ function attachHostListeners() {
                 updateConnectedCount();
             }
         });
-        c.on('close', () => {
-            connections = connections.filter(p => p.conn !== c);
-            updateConnectedCount();
-        });
+        c.on('close', () => { connections = connections.filter(p => p.conn !== c); updateConnectedCount(); });
     });
 }
 
@@ -142,15 +117,12 @@ window.onload = () => {
         document.getElementById('host-only-settings').style.display = 'none';
         document.getElementById('guest-only-settings').style.display = 'block';
     }
-
-    // Highlight word mode cards on selection
     document.querySelectorAll('input[name="impostorWordMode"]').forEach(radio => {
         radio.addEventListener('change', () => {
             document.querySelectorAll('.word-mode-card').forEach(c => c.classList.remove('selected'));
             if (radio.checked) radio.closest('.word-mode-option').querySelector('.word-mode-card').classList.add('selected');
         });
     });
-    // Set default selected
     document.querySelector('input[name="impostorWordMode"]:checked')
         ?.closest('.word-mode-option')?.querySelector('.word-mode-card')?.classList.add('selected');
 };
@@ -185,7 +157,7 @@ function joinWithStoredID() {
             document.getElementById('waiting-msg').style.display = 'block';
         });
         conn.on('data', data => {
-            if (data.type === 'ASSIGN_ROLE') revealRole(data.role, data.word, data.impostorWord, data.category, data.wordMode);
+            if (data.type === 'ASSIGN_ROLE') revealRole(data.role, data.word, data.impostorHint, data.category, data.wordMode);
             if (data.type === 'TURN_ANNOUNCE') showTurnOrder(data.order);
         });
         conn.on('close', () => {
@@ -208,13 +180,7 @@ function updateConnectedCount() {
     }
 }
 
-function getImpostorWord(wordList, realWord) {
-    const others = wordList.filter(w => w !== realWord);
-    if (others.length === 0) return realWord;
-    return others[Math.floor(Math.random() * others.length)];
-}
-
-function startGame() {
+async function startGame() {
     if (!isHost) return;
 
     const iCount = parseInt(document.getElementById('impostorCount').value) || 1;
@@ -229,11 +195,18 @@ function startGame() {
     const wordList = gameData[cat];
     const word = wordList[Math.floor(Math.random() * wordList.length)];
 
-    // Palavra que o impostor vai ver
-    let impostorWord = null;
-    if (wordMode === 'same') impostorWord = word;
-    else if (wordMode === 'similar') impostorWord = getImpostorWord(wordList, word);
-    else impostorWord = null; // 'none'
+    // Gera dica via IA se o modo for "hint"
+    let impostorHint = null;
+    if (wordMode === 'hint') {
+        // Mostra loading no botão
+        const startBtn = document.querySelector('#start-button-container button');
+        if (startBtn) { startBtn.disabled = true; startBtn.innerText = "Gerando dica..."; }
+
+        impostorHint = await generateHint(word, cat);
+        if (!impostorHint) impostorHint = "Sem dica disponível";
+
+        if (startBtn) { startBtn.disabled = false; startBtn.innerText = "COMEÇAR JOGO"; }
+    }
 
     let players = [{ name: myName, conn: null }, ...connections];
     let roles = Array(players.length).fill('innocent');
@@ -241,21 +214,13 @@ function startGame() {
     roles.sort(() => Math.random() - 0.5);
 
     players.forEach((p, idx) => {
-        const roleData = {
-            type: 'ASSIGN_ROLE',
-            role: roles[idx],
-            word: word,
-            impostorWord: impostorWord,
-            category: cat,
-            wordMode: wordMode
-        };
+        const roleData = { type: 'ASSIGN_ROLE', role: roles[idx], word, impostorHint, category: cat, wordMode };
         if (p.conn) p.conn.send(roleData);
-        else revealRole(roles[idx], word, impostorWord, cat, wordMode);
+        else revealRole(roles[idx], word, impostorHint, cat, wordMode);
     });
 
     setTimeout(() => {
-        let orderList = [...players].sort(() => Math.random() - 0.5);
-        let orderNames = orderList.map(p => p.name);
+        let orderNames = [...players].sort(() => Math.random() - 0.5).map(p => p.name);
         const turnData = { type: 'TURN_ANNOUNCE', order: orderNames };
         connections.forEach(p => p.conn.send(turnData));
         showTurnOrder(orderNames);
@@ -266,30 +231,29 @@ function showTurnOrder(order) {
     const content = document.getElementById('roleContent');
     const oldOrder = document.getElementById('visual-order');
     if (oldOrder) oldOrder.remove();
-
     const orderDiv = document.createElement('div');
     orderDiv.id = "visual-order";
-    orderDiv.style.marginTop = "20px";
-    orderDiv.style.paddingTop = "15px";
-    orderDiv.style.borderTop = "1px solid #444";
+    orderDiv.style.cssText = "margin-top:20px; padding-top:15px; border-top:1px solid #444";
     orderDiv.innerHTML = `<small style="color:var(--primary); display:block; margin-bottom:5px;">ORDEM DE FALA:</small>` +
         order.map((name, i) => `<span style="font-size:0.9rem;"><b>${i+1}º</b> ${name}</span>`).join(" <br> ");
     content.appendChild(orderDiv);
 }
 
-function revealRole(role, word, impostorWord, category, wordMode) {
+function revealRole(role, word, impostorHint, category, wordMode) {
     const content = document.getElementById('roleContent');
 
     if (role === 'impostor') {
-        let impostorContent = '';
-        if (wordMode === 'none' || !impostorWord) {
-            impostorContent = `<div style="color:#888; margin-top:10px; font-size:0.9rem;">Você não tem palavra — use sua astúcia!</div>`;
-        } else if (wordMode === 'same') {
-            impostorContent = `<div style="color:#aaa; margin-top:8px; font-size:0.85rem;">Você conhece a palavra:</div><div class="secret-word" style="color:var(--danger)">${impostorWord}</div><div style="color:#888; font-size:0.75rem; margin-top:4px;">⚠️ Mas você ainda é o impostor!</div>`;
-        } else if (wordMode === 'similar') {
-            impostorContent = `<div style="color:#aaa; margin-top:8px; font-size:0.85rem;">Sua palavra (diferente da deles):</div><div class="secret-word" style="color:#ffb347">${impostorWord}</div>`;
+        let hintBlock = '';
+        if (wordMode === 'hint' && impostorHint) {
+            hintBlock = `
+                <div style="margin-top:12px; background:rgba(255,179,71,0.1); border:1px solid #ffb347; border-radius:8px; padding:12px;">
+                    <div style="color:#ffb347; font-size:0.75rem; font-weight:bold; margin-bottom:4px;">💡 SUA DICA</div>
+                    <div style="font-size:1.1rem; color:#fff;">${impostorHint}</div>
+                </div>`;
+        } else {
+            hintBlock = `<div style="color:#888; margin-top:10px; font-size:0.9rem;">Você não tem dica — use sua astúcia!</div>`;
         }
-        content.innerHTML = `<div style="color:var(--danger); font-size:2rem; font-weight:bold;">VOCÊ É O IMPOSTOR</div>${impostorContent}`;
+        content.innerHTML = `<div style="color:var(--danger); font-size:2rem; font-weight:bold;">VOCÊ É O IMPOSTOR</div>${hintBlock}`;
     } else {
         content.innerHTML = `<div>A palavra é:</div><div class="secret-word">${word}</div>`;
     }
