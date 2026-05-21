@@ -1,5 +1,5 @@
 
-const PEER_SERVER_URL = "impostor-peer-server.onrender.com";
+const PEER_SERVER_URL = "https://server-jogo-do-impostor.onrender.com/";
 
 const gameData = {
     "Objetos": ["Geladeira", "Micro-ondas", "Fogão", "Liquidificador", "Pia", "Garfo", "Panela", "Batedeira", "Torradeira", "Prato", "Faca","Airfryer", "Cafeteira", "Colher", "Xícara", "Copo", "Tábua de corte", "Escorredor", "Peneira", "Ralador", "Frigideira","Tupperware", "Garrafa", "Lixeira", "Pano de prato", "Vassoura", "Rodo", "Pá de lixo", "Balde", "Máquina de lavar", "Ferro de passar", "Varal", "Cabide", "Guarda-roupa", "Cama", "Travesseiro", "Lençol", "Cobertor", "Abajur", "Tapete", "Cortina", "Sofá", "Poltrona", "Mesa", "Estante", "Televisão", "Controle remoto", "Quadro", "Vaso", "Relógio de parede", "Espelho", "Escrivaninha", "Cadeira", "Luminária", "Prateleira", "Chuveiro", "Toalha", "Escova de dentes", "Pente", "Secador de cabelo","Tesoura", "Martelo","Furadeira", "Prego", "Trena", "Lanterna", "Vela", "Fósforo", "Isqueiro", "Cesto de roupa", "Mochila", "Mala de viagem", "Guarda-chuva","Carteira", "Óculos","Calculadora", "Grampeador", "Clips", "Papel", "Caneta", "Lápis", "Borracha", "Régua", "Caderno", "Livro"],
