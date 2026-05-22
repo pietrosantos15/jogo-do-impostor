@@ -29,33 +29,11 @@
                 <div id="host-only-settings">
                     <div class="input-group">
                         <label>Categoria</label>
-                        <select id="categorySelect"><option value="aleatorio">🎲 Aleatório</option></select>
+                        <select id="categorySelect"><option value="aleatorio">Aleatório</option></select>
                     </div>
                     <div class="input-group">
                         <label>Impostores</label>
                         <input type="number" id="impostorCount" value="1" min="1">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Modo da palavra do impostor</label>
-                        <div class="word-mode-selector">
-                            <label class="word-mode-option" id="mode-none">
-                                <input type="radio" name="impostorWordMode" value="none" checked>
-                                <div class="word-mode-card">
-                                    <span class="mode-icon">🚫</span>
-                                    <span class="mode-name">Sem palavra</span>
-                                    <span class="mode-desc">Impostor não vê nada</span>
-                                </div>
-                            </label>
-                            <label class="word-mode-option" id="mode-hint">
-                                <input type="radio" name="impostorWordMode" value="hint">
-                                <div class="word-mode-card">
-                                    <span class="mode-icon">💡</span>
-                                    <span class="mode-name">Dica IA</span>
-                                    <span class="mode-desc">IA gera uma dica sobre a palavra</span>
-                                </div>
-                            </label>
-                        </div>
                     </div>
 
                     <button class="success" onclick="prepareOnlineGame()">Gerar Sala Online</button>
@@ -74,7 +52,7 @@
             </div>
 
             <div id="online-share-area" style="display:none;">
-                <h3>🔗 Link da Sala:</h3>
+                <h3>Link da Sala:</h3>
                 <div class="share-box" id="shareLinkText">A carregar...</div>
                 <button class="success" onclick="copyLink()">Copiar Link</button>
                 <p id="connected-count" style="color: #ffca28;">Aguardando amigos...</p>
