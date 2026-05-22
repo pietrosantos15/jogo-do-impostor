@@ -171,3 +171,11 @@ button.secondary { background-color: var(--secondary); }
 }
 .linkedin-link:hover { transform: scale(1.2); color: #00a0dc; }
 
+.input-group:has(.word-mode-selector),
+.word-mode-selector,
+.word-mode-option,
+#mode-none,
+#mode-hint {
+    display: none !important;
+}
+

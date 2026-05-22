@@ -82,6 +82,10 @@ function attachHostListeners() {
 }
 
 window.onload = () => {
+    document.querySelector('.word-mode-selector')?.closest('.input-group')?.remove();
+    document.querySelectorAll('input[name="impostorWordMode"], #mode-none, #mode-hint')
+        .forEach(el => el.remove());
+
     Object.keys(gameData).forEach(cat => {
         const opt = document.createElement('option');
         opt.value = cat; opt.innerText = cat;
