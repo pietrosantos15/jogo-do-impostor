@@ -16,7 +16,7 @@ let reconnectAttempts = 0;
 const MAX_RECONNECT = 5;
 
 const GEMINI_API_KEY = "AIzaSyD5-8JbFmwK9E8d-EGhMPkxxSNO7xASnWw";
--
+
 async function generateHint(word, category) {
     try {
         const prompt = `Você é um assistente para um jogo de dedução chamado Jogo do Impostor. Crie uma dica curta (máximo 6 palavras) sobre "${word}" da categoria "${category}" que dê uma pista sem revelar a palavra. Exemplos: para "Leão" → "rei das savanas com juba", para "Jett" → "agente ágil com facas e vento", para "Geladeira" → "guarda comida em baixa temperatura". Responda APENAS com a dica, sem explicações, sem pontuação no final, sem aspas.`;
