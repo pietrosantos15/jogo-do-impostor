@@ -15,7 +15,6 @@ let isHost = false, myName = "", roomID = null;
 let reconnectAttempts = 0;
 const MAX_RECONNECT = 5;
 
-const GEMINI_API_KEY = "AIzaSyD5-8JbFmwK9E8d-EGhMPkxxSNO7xASnWw";
 
 async function generateHint(word, category) {
     try {
