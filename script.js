@@ -31,13 +31,6 @@ async function generateHint(word, category) {
         return null;
     }
 }
-        const data = await response.json();
-        return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
-    } catch (e) {
-        console.error("Erro ao gerar dica:", e);
-        return null;
-    }
-}
 
 // ---- Indicador de conexão ----
 function setConnectionStatus(state) {
